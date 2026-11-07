@@ -1,0 +1,11 @@
+# Obsidian의 개인 작업공간·앱 설정은 저장소에 올리지 않습니다.
+.obsidian/
+
+# 향후 개발 단계에서 생길 수 있는 비밀값과 의존성 파일
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+dist/
+coverage/
