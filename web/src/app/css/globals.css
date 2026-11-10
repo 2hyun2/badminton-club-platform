@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  /* 브랜드 및 인터랙션 */
+  --brand: #2563EB;          /* 브랜드 · 주요 동작 (blue-600) */
+  --brand-hover: #1D4ED8;    /* 눌림 · Hover (blue-700) */
+  --brand-bg: #DBEAFE;       /* 선택 배경 (blue-100) */
+  --brand-bg-subtle: #EFF6FF;/* 연한 강조 배경 (blue-50) */
+
+  /* 레이아웃 및 서피스 */
+  --app-bg: #F8FAFC;         /* 앱 배경 (bg) */
+  --surface: #FFFFFF;        /* 카드 · 입력 배경 (surface) */
+
+  /* 텍스트 */
+  --text-main: #0F172A;      /* 기본 텍스트 (text) */
+  --text-muted: #64748B;     /* 보조 텍스트 (text-muted) */
+
+  /* 테두리 */
+  --border-main: #E2E8F0;    /* 기본 테두리 (border) */
+  --border-strong: #94A3B8;  /* 컨트롤 테두리 (border-strong) */
+
+  /* 상태 및 피드백 */
+  --danger: #DC2626;         /* 오류 (danger) */
+  --success: #16A34A;        /* 성공 (success) */
+  --warning: #D97706;        /* 주의 (warning) */
+}
+
+@theme {
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-subtle: var(--brand-bg-subtle);
+
+  --color-app-bg: var(--app-bg);
+  --color-surface: var(--surface);
+
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+
+  --color-border-main: var(--border-main);
+  --color-border-strong: var(--border-strong);
+
+  --color-danger: var(--danger);
+  --color-danger-hover: #B91C1C;
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  /* 타이포: 로그인·랜딩의 큰 제목 */
+  --text-display: 1.75rem;
+  --text-display--line-height: 1.25;
+  --text-display--font-weight: 700;
+
+  /* 화면 제목 */
+  --text-heading-1: 1.5rem;
+  --text-heading-1--line-height: 1.3;
+  --text-heading-1--font-weight: 700;
+
+  /* 섹션 제목 */
+  --text-heading-2: 1.25rem;
+  --text-heading-2--line-height: 1.35;
+  --text-heading-2--font-weight: 700;
+
+  /* 카드·목록 제목 */
+  --text-heading-3: 1.125rem;
+  --text-heading-3--line-height: 1.4;
+  --text-heading-3--font-weight: 600;
+
+  /* 기본 본문 */
+  --text-body: 1rem;
+  --text-body--line-height: 1.5;
+  --text-body--font-weight: 400;
+
+  /* 카드 설명·테이블 본문 */
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.45;
+  --text-body-sm--font-weight: 400;
+
+  /* 날짜·보조 정보 */
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-caption--font-weight: 400;
+}
+
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-pretendard), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+@layer components {
+  .page-container { width: min(100% - 32px, 64rem); margin-inline: auto; }
+
+  .card { @apply rounded-lg border border-border-main bg-surface p-4; }
+  .card-lg { @apply rounded-xl p-5; }
+  .card-link { @apply hover:border-brand hover:bg-brand-subtle; }
+
+  /* Button */
+  .btn { @apply inline-flex h-10 max-w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border px-4 text-body-sm font-semibold active:brightness-95; }
+  .btn-primary   { @apply border-brand bg-brand text-white hover:border-brand-hover hover:bg-brand-hover; }
+  .btn-secondary { @apply border-brand bg-surface text-brand hover:bg-brand-subtle; }
+  .btn-ghost     { @apply border-border-strong text-text-main hover:bg-brand-subtle; }
+  .btn-danger    { @apply border-danger bg-danger text-white hover:border-danger-hover hover:bg-danger-hover; }
+  .btn:disabled  { @apply cursor-not-allowed border-slate-300 bg-slate-300 text-slate-400 hover:border-slate-300 hover:bg-slate-300 active:brightness-100; }
+  /* Input */
+  .input { @apply h-10 w-full min-w-0 rounded-lg border border-border-strong bg-surface px-3 text-body-sm text-text-main placeholder:text-slate-400 hover:border-brand disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400 disabled:hover:border-border-strong; }
+  .input:focus { border-color: var(--color-brand); box-shadow: inset 0 0 0 1px var(--color-brand); } /* 테두리 2px 효과, 크기는 그대로 */
+  .input:focus-visible { outline-offset: 0; } /* 바깥 3px ring을 테두리에 붙임 */
+  .input[aria-invalid="true"] { border-color: var(--color-danger); box-shadow: inset 0 0 0 1px var(--color-danger); }
+
+  /* Label */
+  .label { @apply mb-2 block text-body-sm font-semibold leading-[1.4] text-text-main; }
+
+  @media (width >= 48rem) {
+    .page-container { width: min(100% - 48px, 64rem); }
+  }
+}
