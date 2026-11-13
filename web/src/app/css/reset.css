@@ -1,125 +1,138 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@import "tailwindcss";
 
-/* 모바일 브라우저가 글자를 임의로 키우지 않게 하고, 앱 전체 높이 기준을 만든다. */
-html {
-  min-block-size: 100%;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-/* 브라우저 기본 여백을 없애고, 디자인 시스템의 기본 글꼴·색상을 적용한다. */
-body {
-  min-block-size: 100vh;
-  margin: 0;
-  color: var(--color-text);
-  background: var(--color-bg);
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  font-synthesis: none;
-}
-
-/* 제목과 문단의 브라우저 기본 위아래 여백을 없앤다.
-   화면별 간격은 Stack, Section, Card 컴포넌트에서 명시한다. */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-figure,
-blockquote {
-  margin: 0;
-}
-
-/* 목록의 기본 들여쓰기·점은 제거한다.
-   실제 글 목록에는 전용 prose 스타일에서 다시 정의한다. */
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* 이미지와 SVG가 줄간격 때문에 아래에 빈 공간을 만들지 않게 한다. */
-img,
-picture,
-svg,
-canvas,
-video {
-  display: block;
-  max-inline-size: 100%;
-}
-
-img,
-video {
-  block-size: auto;
-}
-
-/* 버튼·입력 요소가 부모의 글꼴과 글자색을 그대로 쓴다.
-   border, background, height는 Button/Input 컴포넌트에서 명시한다. */
-button,
-input,
-textarea,
-select {
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-}
-
-button:not(:disabled),
-select:not(:disabled) {
-  cursor: pointer;
-}
-
-button:disabled,
-input:disabled,
-textarea:disabled,
-select:disabled {
-  cursor: not-allowed;
-}
-
-input,
-textarea,
-select {
-  min-inline-size: 0;
-}
-
-textarea {
-  resize: vertical;
-}
-
-/* 표의 셀 간 기본 간격을 없앤다. 표 디자인은 별도 컴포넌트에서 정한다. */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* 숨김 속성은 어떤 display 규칙보다 우선한다. */
-[hidden] {
-  display: none !important;
-}
-
-/* 키보드로 이동할 때만 명확한 포커스 링을 보여 준다.
-   mouse 클릭에는 과도한 링을 보이지 않는다. */
-:focus-visible {
-  outline: 3px solid rgba(37, 99, 235, 0.35);
-  outline-offset: 2px;
-}
-
-/* 움직임에 민감한 사용자는 전환·스크롤 애니메이션을 최소화한다. */
-@media (prefers-reduced-motion: reduce) {
+/*
+ * 전체 reset을 base 레이어 안에 둔다.
+ * 레이어 밖에 있으면 .btn, .input 같은 components 레이어와 유틸리티 클래스를 모두 이겨서
+ * 버튼 글자 크기·굵기·색이 덮어써지는 문제가 있었다. (draft NOTES DIFF-03, DIFF-10)
+ */
+@layer base {
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    box-sizing: border-box;
+    word-break: keep-all;
+  }
+
+  /* 모바일 브라우저가 글자를 임의로 키우지 않게 하고, 앱 전체 높이 기준을 만든다. */
+  /* 스크롤바 자리를 항상 비워 두어, 스크롤바 유무에 따라 화면이 좌우로 밀리지 않게 한다. */
+  html {
+    scrollbar-gutter: stable;
+    min-block-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* 브라우저 기본 여백을 없애고, 디자인 시스템의 기본 글꼴·색상을 적용한다. */
+  body {
+    min-block-size: 100vh;
+    margin: 0;
+    word-break: keep-all;
+    color: var(--color-text);
+    background: var(--color-bg);
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-synthesis: none;
+  }
+
+  /* 제목과 문단의 브라우저 기본 위아래 여백을 없앤다.
+     화면별 간격은 Stack, Section, Card 컴포넌트에서 명시한다. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  figure,
+  blockquote {
+    margin: 0;
+  }
+
+  /* 목록의 기본 들여쓰기·점은 제거한다.
+     실제 글 목록에는 전용 prose 스타일에서 다시 정의한다. */
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* 이미지와 SVG가 줄간격 때문에 아래에 빈 공간을 만들지 않게 한다. */
+  img,
+  picture,
+  svg,
+  canvas,
+  video {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  img,
+  video {
+    block-size: auto;
+  }
+
+  /* 버튼·입력 요소가 부모의 글꼴과 글자색을 그대로 쓴다.
+     border, background, height는 Button/Input 컴포넌트에서 명시한다. */
+  button,
+  input,
+  textarea,
+  select {
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+
+  button:not(:disabled),
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    cursor: not-allowed;
+  }
+
+  input,
+  textarea,
+  select {
+    min-inline-size: 0;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  /* 표의 셀 간 기본 간격을 없앤다. 표 디자인은 별도 컴포넌트에서 정한다. */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  /* 숨김 속성은 어떤 display 규칙보다 우선한다. */
+  [hidden] {
+    display: none !important;
+  }
+
+  /* 키보드로 이동할 때만 명확한 포커스 링을 보여 준다.
+     mouse 클릭에는 과도한 링을 보이지 않는다. */
+  :focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 2px;
+  }
+
+  /* 움직임에 민감한 사용자는 전환·스크롤 애니메이션을 최소화한다. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

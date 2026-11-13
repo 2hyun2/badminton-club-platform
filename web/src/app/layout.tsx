@@ -19,9 +19,9 @@ const pretendard = localFont({
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`h-full ${pretendard.variable}`}>
-      <body className="min-h-full flex flex-col text-body text-text-main bg-app-bg">
-        <div className="flex-1 page-container">{children}</div>
+    <html lang="ko" className={`h-full bg-app-bg ${pretendard.variable}`}>
+      <body className="min-h-full flex flex-col text-body text-text-main">
+        <div className="flex-1 py-6">{children}</div>
       </body>
     </html>
   );

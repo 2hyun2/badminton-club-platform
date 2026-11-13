@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function IntroLayout({ children }: { children: ReactNode }) {
   return (
-      <main className="flex items-center justify-center min-h-dvh">
-        <div className="card max-w-xl w-full">{children}</div>
-      </main>
-  );
+    <main className="flex min-h-dvh items-center justify-center">
+      <section className="card w-full max-w-[25rem] p-5 md:p-6">{children}</section>
+    </main>
+  )
 }
