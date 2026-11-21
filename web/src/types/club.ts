@@ -31,6 +31,10 @@ export type ClubSearchItem = {
     sigunguName: string
   }
   venueName: string
+  /** 체육관 도로명 주소. [위치 복사]는 이 값만 복사한다 (DECIDE-20) */
+  venueAddress: string
+  /** 체육관 좌표(WGS84). 카카오 장소 검색 결과를 저장한다. 길찾기 링크와 시·군·구 변환에 쓴다 */
+  venueLocation: { lat: number; lng: number }
   activitySummary: string
   memberCount: number
   membershipCondition: {
