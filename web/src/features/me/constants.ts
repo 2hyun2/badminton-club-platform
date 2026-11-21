@@ -1,8 +1,12 @@
 import type { MembershipRole, MyMembership } from "@/types/me"
 
-/** 역할 이름 (07 동호회 홈 화면 설계의 클럽장·매니저·일반 회원) */
+/**
+ * 권한 기본 이름 (DECIDE-26)
+ * 화면에는 동호회가 정한 직책(회장·총무·경기이사 등)이 있으면 직책을, 없으면 이 이름을 보여 준다
+ * TEMP: UNDEF-61 — 기본 이름 미정. 직책 데이터도 아직 없어 지금은 이 이름만 보인다
+ */
 export const MEMBERSHIP_ROLE_LABELS: Record<MembershipRole, string> = {
-  owner: "클럽장",
+  admin: "클럽장",
   manager: "매니저",
   member: "회원",
 }

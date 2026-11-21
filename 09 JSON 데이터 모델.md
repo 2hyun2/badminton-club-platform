@@ -179,7 +179,7 @@ tags:
 | 필드 | 예시 값 | 의미 |
 | --- | --- | --- |
 | `status` | `pending`, `active`, `rejected`, `left`, `suspended` | 해당 동호회 가입 상태 |
-| `role` | `member`, `manager`, `owner` | 해당 동호회 안의 권한 |
+| `role` | `member`, `manager`, `admin` | 해당 동호회 안의 권한. `admin`은 동호회당 1명·계정당 1개 동호회, `manager`는 인원 한도 없음 (DECIDE-26) |
 | `tier` | `C`, `1조` 등 | 동호회가 자체적으로 정한 내부 등급 표시값. MVP에서는 고정 목록·등급 설정 화면을 만들지 않는다. |
 | `feeStatus` | `paid`, `unpaid`, `exempt` | 현재 기준 회비 상태 요약 |
 
@@ -234,7 +234,7 @@ tags:
 
 - 비회원 게스트는 없다. `applicant.kind`는 항상 `registered_user`이고 `userId`를 연결해 `내 계정 > 게스트 신청 내역`에 남긴다.
 - `formId`와 `formVersion`은 신청 당시 공개된 양식을 가리킨다. 양식 정의가 바뀌어도 과거 신청을 같은 기준으로 해석할 수 있어야 한다.
-- `answers`는 클럽장이 설정한 동적 양식이라 JSON 형태로 둔다.
+- `answers`는 admin이 설정한 동적 양식이라 JSON 형태로 둔다.
 - 승인·거절·취소의 운영 이력은 `review`와 별도 상태 이력으로 보존하며, `reason`에는 거절·취소 사유만 넣는다.
 - 게스트 양식 답변(메모 등 개인정보)은 운동 종료일 기준 7일 뒤 `privacy.piiExpiresAt`에 정리 대상이다. 답변은 운영진의 해당 신청 상세에서만 보인다.
 
@@ -343,14 +343,14 @@ tags:
   ],
   "privacy": {
     "retentionDaysAfterSession": 7,
-    "viewerRoles": ["owner", "manager"]
+    "viewerRoles": ["admin", "manager"]
   },
   "updatedByMembershipId": "mbr_01J...",
   "updatedAt": "2026-11-07T10:00:00+09:00"
 }
 ```
 
-`fields`와 `answers`에는 초기 버전에서 허용한 표준 항목만 사용한다. 클럽장이 임의의 민감정보나 자유로운 개인정보 수집 문구를 추가하지 않게 한다.
+`fields`와 `answers`에는 초기 버전에서 허용한 표준 항목만 사용한다. admin이 임의의 민감정보나 자유로운 개인정보 수집 문구를 추가하지 않게 한다.
 
 게스트 양식의 `skillLevel`은 동호회가 방문 심사를 위해 받는 답변이다. 선택지는 동호회가 정할 수 있으며, 공개 동호회 탐색의 공통 `운동 수준`을 기본 제안값으로만 제공한다. `Membership.tier`와 같은 의미로 연결하지 않는다.
 
