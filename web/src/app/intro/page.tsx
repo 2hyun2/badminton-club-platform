@@ -12,16 +12,7 @@ export default function IntroPage() {
         <SocialLoginButtons />
       </div>
 
-      <div className="mt-5 flex items-center gap-3" aria-hidden="true">
-        <span className="h-px flex-1 bg-border-main" />
-        <span className="text-caption text-text-muted">또는</span>
-        <span className="h-px flex-1 bg-border-main" />
-      </div>
-
-      <Link href="/guest" className="btn btn-ghost mt-5 w-full">
-        게스트로 동호회 살펴보기
-      </Link>
-
+      {/* 17 인트로 화면 설계: 로그인 없이 들어가는 게스트 진입은 없다 (DECIDE-18) */}
       <p className="mt-5 text-caption text-text-muted">
         계속하면 <Link href="/terms" className="text-brand underline underline-offset-2">이용약관</Link> 및{" "}
         <Link href="/privacy" className="text-brand underline underline-offset-2">개인정보 처리방침</Link>에 동의하는 것으로 봅니다.

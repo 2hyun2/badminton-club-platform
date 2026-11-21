@@ -109,7 +109,7 @@ tags:
   "memberCount": 48, // 현재 활성 회원 수를 조회해 만든 화면용 값
   "membershipCondition": {
     "gender": "all", // all / female / male. 공개 모집 조건
-    "skillLevels": ["초중급", "중급", "중상급"]
+    "skillLevels": ["D조", "C조", "B조"]
   },
   "recruitment": {
     "membership": { "isOpen": false },
@@ -119,7 +119,7 @@ tags:
 ```
 
 - 지역 필터의 형식은 `시·도 → 시·군·구`로 고정한다. 전국 목록을 미리 넣지 않고, 현재 공개 검색에 노출되는 동호회의 정규화된 지역만 선택지로 만든다.
-- 탐색 화면의 `운동 수준`은 서비스 공통 분류인 `초급`, `초중급`, `중급`, `중상급`, `상급`만 사용한다.
+- 탐색 화면의 `운동 수준`은 서비스 공통 분류인 동호인 대회 조 단위 `초심`, `D조`, `C조`, `B조`, `A조`, `준자강`, `자강`만 사용한다.
 - `membershipCondition.gender`와 `skillLevels`는 공개 동호회 탐색을 위한 모집 조건이다. 회원의 동호회 내부 등급이나 게스트 신청 답변과 같은 값으로 취급하지 않는다.
 
 ## 동호회 미디어 저장공간 `ClubMediaUsage`
@@ -335,7 +335,7 @@ tags:
       "type": "select",
       "label": "급수",
       "required": false,
-      "options": ["초심", "A", "B", "C", "D"]
+      "options": ["초심", "D조", "C조", "B조", "A조", "준자강", "자강"]
     }
   ],
   "privacy": {

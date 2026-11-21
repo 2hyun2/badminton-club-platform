@@ -1,17 +1,20 @@
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import type { ReactNode } from "react";
 
 type BackLinkProps = {
     href: string;
-    label?: string;
+    // 어디로 돌아가는지 화면마다 직접 적는다 (DECIDE-13)
+    label: string;
 }
 
 type PageHeadingProps = {
     title: string;
-    description: string;
+    // 신청서처럼 동호회 이름을 굵게 넣는 설명이 있어 ReactNode로 받는다
+    description?: ReactNode;
 }
 
-export function BackLink({href, label = "뒤로가기"} : BackLinkProps) {
+export function BackLink({href, label} : BackLinkProps) {
     return (
         <Link href={href} className="btn btn-ghost pl-2">
             <ChevronLeft className="size-6" />
