@@ -26,10 +26,6 @@ tags:
     "displayName": "홍길동",
     "photoMediaId": null
   },
-  "contact": {
-    "phone": null,
-    "phoneVerifiedAt": null
-  },
   "preferences": {
     "lastSelectedClubId": "clb_hanbit",
     "locale": "ko-KR",
@@ -216,7 +212,6 @@ tags:
   "formId": "gform_01J...",
   "formVersion": 3,
   "answers": {
-    "phone": "010-1234-5678",
     "skillLevel": "중급",
     "experienceYears": 2,
     "message": "체험 참가를 희망합니다."
@@ -230,50 +225,15 @@ tags:
     "reviewedByMembershipId": null,
     "reviewedAt": null,
     "reason": null
-  },
-  "access": {
-    "type": "guest_access_code",
-    "guestAccessCodeHash": "server-side-hash-only",
-    "expiresAt": "2026-11-13T23:59:59+09:00"
   }
 }
 ```
 
-- `applicant.kind`은 `anonymous_guest` 또는 `registered_user`다.
-- 앱 회원 게스트는 `userId`를 연결해 `내 계정 > 게스트 신청 내역`에 남긴다.
+- 비회원 게스트는 없다. `applicant.kind`는 항상 `registered_user`이고 `userId`를 연결해 `내 계정 > 게스트 신청 내역`에 남긴다.
 - `formId`와 `formVersion`은 신청 당시 공개된 양식을 가리킨다. 양식 정의가 바뀌어도 과거 신청을 같은 기준으로 해석할 수 있어야 한다.
 - `answers`는 클럽장이 설정한 동적 양식이라 JSON 형태로 둔다.
 - 승인·거절·취소의 운영 이력은 `review`와 별도 상태 이력으로 보존하며, `reason`에는 거절·취소 사유만 넣는다.
-- 비회원 게스트의 전화번호·메모 등 개인정보는 운동 종료일 기준 7일 뒤 `privacy.piiExpiresAt`에 정리 대상이다.
-
-## 비회원 게스트 신청함
-
-비회원은 앱 계정이 없으므로 `내 계정` 대신, 현재 브라우저 또는 앱에서 볼 수 있는 `내 게스트 신청함`을 제공한다.
-
-```json
-{
-  "guestApplicationInbox": [
-    {
-      "applicationId": "gst_01J...",
-      "clubId": "clb_hanbit",
-      "clubName": "한빛 배드민턴",
-      "status": "pending",
-      "submittedAt": "2026-11-06T10:00:00+09:00",
-      "guestAccessCode": "GST-7KQN-4P9M-2X6D",
-      "expiresAt": "2026-11-13T23:59:59+09:00"
-    }
-  ]
-}
-```
-
-- 이 JSON은 **기기에서 다시 찾아보기 위한 편의 목록**이다. 실제 신청 내용과 승인 상태의 원본은 서버에 있다.
-- `guestAccessCode`는 신청번호가 아니라, 타인의 신청을 추측해 조회할 수 없도록 만든 무작위 개인 접근 코드다. 신청 데이터가 동호회 게스트 신청 DB에 등록된 뒤 발행하며, 서버에는 원문이 아닌 해시만 보관한다.
-- 제출 완료 화면에서 게스트 접근 코드를 크게 보여 주고 `복사`를 권장한다. 현재 기기에는 신청함을 자동 저장한다.
-- 웹에서는 가능하면 `HttpOnly` 보안 쿠키로 접근 권한을 관리하고, 화면용 목록에는 클럽명·상태처럼 민감하지 않은 정보만 저장한다.
-- 인트로의 `게스트`는 이 신청함 전용 페이지로 연결한다. 기기에 신청함이 있으면 바로 목록을 보여 주고, 없으면 빈 목록 대신 `게스트 접근 코드 입력` 화면을 보여 준다.
-- 브라우저 데이터 삭제·기기 변경으로 신청함이 사라지면 `게스트 접근 코드 입력` 화면에서 복사해 둔 코드를 입력한다.
-- 게스트 접근 코드 자체를 잃어버린 비회원의 조회는 전화번호 등 검증 가능한 연락 수단을 필수로 받은 동호회에서만 별도 복구 절차를 제공할 수 있다. 단순 이름·전화번호 입력만으로는 조회를 허용하지 않는다.
-- 신청 내용, 전화번호, 메모는 목록에 저장하거나 보여 주지 않는다. 상태 조회 화면에서 접근 권한을 확인한 뒤 필요한 최소 정보만 보여 준다.
+- 게스트 양식 답변(메모 등 개인정보)은 운동 종료일 기준 7일 뒤 `privacy.piiExpiresAt`에 정리 대상이다. 답변은 운영진의 해당 신청 상세에서만 보인다.
 
 ## 운동 참가자 `SessionParticipant`
 
@@ -362,7 +322,7 @@ tags:
   "fields": [
     {
       "key": "name",
-      "type": "text", // text / phone / select / number / textarea
+      "type": "text", // text / select / number / textarea
       "label": "이름",
       "required": true,
       "privacy": {
