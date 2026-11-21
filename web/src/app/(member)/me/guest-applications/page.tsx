@@ -9,7 +9,7 @@ import { GUEST_INBOX_ITEMS, findClub } from "@/mocks"
 import type { GuestInboxItem } from "@/types/guest"
 
 /*
- * 게스트 신청 내역 (/guest/applications). 로그인한 앱 회원만 (DECIDE-16)
+ * 게스트 신청 내역 (/me/guest-applications). 로그인한 앱 회원만 (DECIDE-16)
  * 기준: [[10 게스트 페이지 설계]] 1
  *  - 카드에는 동호회·일정·상태·신청일만. 양식 답변은 보이지 않음
  *  - 방문 당일 게스트가 "승인" 카드를 보여 주고 운영진이 이름을 맞춰 확인

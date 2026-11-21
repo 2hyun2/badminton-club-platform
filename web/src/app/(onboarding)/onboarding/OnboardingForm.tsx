@@ -23,7 +23,7 @@ import type { OnboardingConsents, OnboardingGender, OnboardingProfileForm } from
  *  - 오류는 제출할 때 한꺼번에 보여 주고, 첫 오류 칸으로 Focus를 옮긴다 (게스트 신청서와 같은 방식)
  *  - 필수 동의 3개 + 선택 동의 1개. "전체 동의"는 네 개를 한 번에 켜고 끈다
  * TEMP: UNDEF-34 알림 동의 선택 · UNDEF-35 생년월일 입력 방식 · UNDEF-36 경력 선택지
- *       UNDEF-37 급수 선택지 · UNDEF-38 사는 곳 선택지 · UNDEF-39 완료 뒤 이동
+ *       UNDEF-37 급수 선택지 · UNDEF-38 사는 곳 선택지 · 완료 뒤 /me (DECIDE-23)
  */
 
 type FieldKey = "displayName" | "gender" | "birth" | "career" | "skillLevel" | "consents"
@@ -98,8 +98,8 @@ export default function OnboardingForm() {
       document.getElementById(fieldId(firstError))?.focus()
       return
     }
-    // TODO: 계정 생성 API 연결. 완료 뒤에는 동호회 선택 화면으로 가야 하지만 아직 없어 /clubs로 보낸다 (UNDEF-39)
-    router.push("/clubs")
+    // TODO: 계정 생성 API 연결. 완료 뒤 내 동호회(/me)로 간다 (DECIDE-23)
+    router.push("/me")
   }
 
   return (

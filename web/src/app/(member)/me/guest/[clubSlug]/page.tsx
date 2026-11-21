@@ -9,7 +9,7 @@ import { BackLink, PageHeading } from "@/components/layout/PageTop"
 import GuestApplyForm from "./GuestApplyForm"
 
 /*
- * 게스트 참가 신청 (/guest/submit/[clubSlug]). 로그인한 앱 회원만 (DECIDE-16)
+ * 게스트 참가 신청 (/me/guest/[clubSlug]). 로그인한 앱 회원만 (DECIDE-16)
  * 기준: [[10 게스트 페이지 설계]] 4 — guest.isOpen이 false면 신청서 대신
  *       "현재 게스트 신청을 받지 않습니다." 안내 (직접 URL 진입 대비)
  * TEMP: UNDEF-21 — 일정이 없으면 신청서 대신 안내

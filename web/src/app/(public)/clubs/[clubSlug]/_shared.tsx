@@ -48,7 +48,7 @@ export function JoinActions({ club }: { club: ClubSearchItem }) {
   return (
     <div className="flex flex-col gap-2 sm:flex-row">
       {guest.isOpen && (
-        <Link href={`/guest/submit/${club.slug}`} className="btn btn-primary">
+        <Link href={`/me/guest/${club.slug}`} className="btn btn-primary">
           게스트 참가 신청
         </Link>
       )}

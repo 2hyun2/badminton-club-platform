@@ -18,7 +18,7 @@ import {
 import type { GuestSessionOption } from "@/types/guest"
 
 /*
- * 게스트 참가 신청서 (/guest/submit/[clubSlug])
+ * 게스트 참가 신청서 (/me/guest/[clubSlug])
  * 기준: [[10 게스트 페이지 설계]] 2 · [[04 개인정보 및 게스트 양식 정책]] · DECIDE-16·18
  *  - 로그인한 앱 회원만 신청. 전화번호·비밀번호·접근 코드 없음
  *  - 계정이 곧 한 사람이라는 보장이 없으므로 동호회 게스트 양식은 그대로 받음
@@ -402,7 +402,7 @@ function SubmitDone({
       </section>
 
       <div className="mt-6 flex flex-col gap-3">
-        <Link href="/guest/applications" className="btn btn-primary w-full">
+        <Link href="/me/guest-applications" className="btn btn-primary w-full">
           게스트 신청 내역으로
         </Link>
         <Link href={backHref} className="btn btn-ghost w-full">
